@@ -2,6 +2,6 @@ class UsersController < ApplicationController
   before_action :authorize
 
   def index
-    @users ||= User.all
+    @users ||= User.includes(:group).all
   end
 end

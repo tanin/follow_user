@@ -13,7 +13,7 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.name %></td>
-          <td><%=  %></td>
+          <td><%= user.group.name %></td>
           <td><%#= button_to 'Follow', user %></td>
         </tr>
       <% end %>
