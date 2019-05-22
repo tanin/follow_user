@@ -14,10 +14,12 @@ ActiveRecord::Schema.define(version: 20190522163230) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "group_id"
-    t.string "name", limit: 50, null: false
+    t.string "name", null: false
+    t.string "email", limit: 100, null: false
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["name"], name: "index_users_on_name", unique: true
   end
