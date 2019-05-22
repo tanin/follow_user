@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  before do
-    # TODO: move to spec_helper
-    Faker::Name.unique.clear
-  end
-
   let(:user) { build(:user) }
 
   it 'creates record' do
