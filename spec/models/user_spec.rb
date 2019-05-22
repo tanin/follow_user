@@ -53,6 +53,14 @@ describe User, type: :model do
           expect(new_user).to_not be_valid
         end
       end
+
+      context 'when is invalid email' do
+        it 'is invalid' do
+          user.email = 'foo@bar.'
+
+          expect(user).to_not be_valid
+        end
+      end
     end
   end
 end
