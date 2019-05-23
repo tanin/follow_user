@@ -1,7 +1,6 @@
 class RelationshipsController < ApplicationController
   before_action :authorize
 
-
   def create
     current_user.active_relationships.create(followed_id: followed_user.id)
     respond_to { |format| format.js }
