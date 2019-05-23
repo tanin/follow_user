@@ -18,7 +18,7 @@
           <td><div id=<%= "followers_count_#{user.id}" %>><%= user.relationships_count %></div></td>
           <td>
             <div id=<%= "follow_form_#{user.id}" %>>
-              <% if current_user.following?(user) %>
+              <% if user.followed?(current_user) %>
                 <%= render 'unfollow', locals: { user: user } %>
               <% else %>
                 <%= render 'follow', locals: { user: user } %>
