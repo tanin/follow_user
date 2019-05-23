@@ -1,0 +1,3 @@
+$('<%= "#followers_count_#{@followed_user.id}" %>').html("<%= @followed_user.reload.relationships_count %>");
+$('<%= "#follow_form_#{@followed_user.id}" %>').html("<%= escape_javascript(render('users/unfollow', locals: { user: @followed_user })) %>");
+setFollowBtnHover();

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe User, type: :model do
   let(:user) { build(:user) }
+  let(:new_user) { build(:user) }
 
   it 'creates record' do
     expect(user.save!).to be true
@@ -20,7 +21,6 @@ describe User, type: :model do
       context 'when is not unique' do
         it 'is invalid' do
           user.save!
-          new_user = build(:user)
           new_user.name = user.name
 
           expect(new_user).to_not be_valid
@@ -42,7 +42,6 @@ describe User, type: :model do
       context 'when is not unique' do
         it 'is invalid' do
           user.save!
-          new_user = build(:user)
           new_user.email = user.email
 
           expect(new_user).to_not be_valid
@@ -55,6 +54,39 @@ describe User, type: :model do
 
           expect(user).to_not be_valid
         end
+      end
+    end
+  end
+
+  describe '#relationships_count' do
+
+    before do
+      user.save!
+      new_user.save!
+    end
+
+    it 'increases and decreases relationships_count' do
+      expect { user.active_relationships.create!(followed: new_user) }.to change(new_user, :relationships_count).by(1).and(
+        change(user, :relationships_count).by(0)
+      )
+
+      expect { user.active_relationships.destroy_all }.to change(new_user, :relationships_count).by(-1).and(
+        change(user, :relationships_count).by(0)
+      )
+    end
+  end
+
+  describe '#following?' do
+    before do
+      user.save!
+      new_user.save!
+    end
+
+    context 'when following' do
+      it 'return true' do
+        user.active_relationships.create!(followed: new_user)
+
+        expect(user.reload.following?(new_user)).to eq(true)
       end
     end
   end

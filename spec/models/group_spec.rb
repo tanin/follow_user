@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe Group, type: :model do
-  let(:group) { create(:group) }
+  let(:group) { build(:group) }
 
   it 'creates record' do
-    expect(group).to be_persisted
+    expect(group.tap(&:save!)).to be_persisted
   end
 
   describe '#name' do
