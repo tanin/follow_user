@@ -12,4 +12,4 @@
 - u.password = '123456'
 - u.save!
 - rails s
-- http://localehost:3000
+- http://localhost:3000
