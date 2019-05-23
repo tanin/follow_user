@@ -76,17 +76,17 @@ describe User, type: :model do
     end
   end
 
-  describe '#following?' do
+  describe '#followed?' do
     before do
       user.save!
       new_user.save!
     end
 
-    context 'when following' do
+    context 'when followed' do
       it 'return true' do
         user.active_relationships.create!(followed: new_user)
 
-        expect(user.reload.following?(new_user)).to eq(true)
+        expect(new_user.reload.followed?(user)).to eq(true)
       end
     end
   end
